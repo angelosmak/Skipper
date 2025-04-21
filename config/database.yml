@@ -6,15 +6,19 @@ default: &default
   host: localhost
 
 development:
-  <<: *default
-  database: skipper_development
-
-test:
-  <<: *default
-  database: skipper_test
+  adapter: postgresql
+  encoding: unicode
+  database: your_database_name
+  pool: 5
+  username: your_username
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: localhost
 
 production:
-  <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  adapter: postgresql
+  encoding: unicode
+  database: skipper-database
   pool: 5
-  timeout: 5000
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
