@@ -14,7 +14,6 @@ test:
   database: skipper_test
 
 production:
-  <<: *default
-  database: skipper_production
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000
