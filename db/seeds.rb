@@ -11,6 +11,9 @@
 # db/seeds.rb
 
 # Create 5 sample skippers with different attributes
+#
+require 'open-uri'
+
 5.times do |i|
   skipper = Skipper.create!(
     name: "Skipper #{i + 1}",
@@ -21,9 +24,8 @@
 
   if Rails.env.development? || Rails.env.test?
     # Video
-    # video_path = Rails.root.join('app', 'assets', 'images', 'video.mp4')
-    # skipper.video.attach(io: File.open(video_path), filename: "video.mp4", content_type: 'video/mp4')
-
+    video_url = "https://res.cloudinary.com/dhbrz1unb/video/upload/v1745246610/nfka9bcoiyw4w3poxnoe.mp4"
+    skipper.video.attach(io: URI.open(video_url), filename: "promo_video.mp4", content_type: 'video/mp4')
     # CV
     cv_path = Rails.root.join('app', 'assets', 'documents', 'sample_cv.pdf')
     skipper.cv.attach(io: File.open(cv_path), filename: "cv_#{i + 1}.pdf", content_type: 'application/pdf')
