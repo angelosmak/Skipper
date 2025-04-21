@@ -8,9 +8,9 @@ default: &default
 development:
   adapter: postgresql
   encoding: unicode
-  database: your_database_name
+  database: skipper_development
   pool: 5
-  username: your_username
+  username: angelosathanasiosmakris
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
 
