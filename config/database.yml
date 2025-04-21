@@ -14,6 +14,7 @@ test:
   database: skipper_test
 
 production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
   pool: 5
   timeout: 5000
