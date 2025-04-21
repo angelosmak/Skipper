@@ -1,0 +1,164 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ .container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 10px 0;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f1f0f6;
+  color: #333;
+}
+
+/* Navigation Bar */
+header {
+  background-color: #003366; /* Navy Blue */
+  padding: 10px 20px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+}
+
+nav ul li {
+  margin: 0 15px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 18px;
+}
+
+nav ul li a:hover {
+  color: #87CEEB; /* Sky Blue */
+}
+
+/* Hero Section */
+.hero {
+  background: url('video.mp4') center/cover no-repeat; /* Add your image path here */
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+  background-size: cover;
+  height: 50vh;
+}
+
+.hero-content {
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.cta-button {
+  background-color: #00FFFF; /* Aqua */
+  color: #003366; /* Navy Blue */
+  padding: 12px 25px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
+/* About Section */
+.about {
+  background-color: #ffffff;
+  color: #333;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.about h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.about p {
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Footer */
+footer {
+  background-color: #003366; /* Navy Blue */
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Open Sans', sans-serif;
+}

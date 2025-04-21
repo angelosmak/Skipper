@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Welcome, <%= @skipper.name %>!</h1>
+
+  <h2>Manage Your Profile</h2>
+  <%= link_to "Edit Profile", edit_skipper_path(@skipper), class: "btn" %>
+
+  <h3>Your Bio</h3>
+  <p><%= @skipper.bio %></p>
+
+  <h3>Your Documents</h3>
+  <p><%= @skipper.cv.present? ? "CV uploaded" : "No CV uploaded" %></p>
+  <p><%= @skipper.docs.present? ? "Documents uploaded" : "No documents uploaded" %></p>
+</div>

@@ -1,0 +1,71 @@
+<div class="container">
+  <h1>Skippers</h1>
+
+  <div class="skippers-list">
+  <% @skippers.each_with_index do |skipper, index| %>
+    <div class="skipper-profile-card">
+      <% if skipper.photo.attached? %>
+        <%= image_tag skipper.photo, class: "skipper-photo" %>
+      <% else %>
+        <%= image_tag "1.jpg", class: "skipper-photo" %>
+      <% end %>
+
+      <div class="skipper-details">
+        <h3><%= link_to skipper.name, skipper_path(skipper) %></h3>
+        <p><%= skipper.bio.truncate(100) %></p>
+        <%= link_to "View Profile", skipper_path(skipper), class: "btn" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>
+<style>
+.skippers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.skipper-profile-card {
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fefefe;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.skipper-profile-card:hover {
+  transform: translateY(-5px);
+}
+
+.skipper-photo {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.skipper-details {
+  padding-top: 10px;
+}
+
+.btn {
+  background-color: #0077cc;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.btn:hover {
+  background-color: #005fa3;
+}
+</style>

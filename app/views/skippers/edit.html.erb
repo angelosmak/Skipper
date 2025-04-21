@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>Edit Your Profile</h1>
+
+  <%= form_with model: @skipper, local: true do |form| %>
+    <div>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </div>
+
+    <div>
+      <%= form.label :bio %><br>
+      <%= form.text_area :bio %>
+    </div>
+
+    <div>
+      <%= form.label :video %><br>
+      <%= form.file_field :video %>
+    </div>
+
+    <div>
+      <%= form.label :cv %><br>
+      <%= form.file_field :cv %>
+    </div>
+
+    <div>
+      <%= form.label :docs %><br>
+      <%= form.file_field :docs %>
+    </div>
+
+    <div>
+      <%= form.submit "Save Changes", class: "btn" %>
+    </div>
+  <% end %>
+</div>
