@@ -9,6 +9,8 @@
 # Ignore all environment files (except templates).
 /.env*
 !/.env*.erb
+/app/assets/images/video.mp4
+*.mp4
 
 # Ignore all logfiles and tempfiles.
 /log/*
