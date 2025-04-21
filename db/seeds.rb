@@ -21,8 +21,8 @@
 
   if Rails.env.development? || Rails.env.test?
     # Video
-    video_path = Rails.root.join('app', 'assets', 'images', 'video.mp4')
-    skipper.video.attach(io: File.open(video_path), filename: "video.mp4", content_type: 'video/mp4')
+    # video_path = Rails.root.join('app', 'assets', 'images', 'video.mp4')
+    # skipper.video.attach(io: File.open(video_path), filename: "video.mp4", content_type: 'video/mp4')
 
     # CV
     cv_path = Rails.root.join('app', 'assets', 'documents', 'sample_cv.pdf')
@@ -41,4 +41,3 @@
 end
 
 puts "🎉 Seeded skippers with all attachments!"
-
