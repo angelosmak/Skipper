@@ -1,45 +1,50 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require "open-uri"
 
-# db/seeds.rb
+cv_url = "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745321004/cv.pdf"
+doc_url = "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745321004/doc.pdf"
+video_url = "https://res.cloudinary.com/dhbrz1unb/video/upload/v1745246610/video.mp4"
+image_urls = [
+  "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745321006/1.jpg",
+  "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745321005/2.jpg",
+  "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745321005/3.jpg",
+  "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745322626/4.jpg",
+  "https://res.cloudinary.com/dhbrz1unb/image/upload/v1745321004/5.jpg"
+]
 
-# Create 5 sample skippers with different attributes
-#
-require 'open-uri'
+names = [ "Nikos Papadopoulos", "Spiros Fakiolas", "Kostas Vasilakis", "Dimitris Savvatis", "Giannis Karalis" ]
+bios = [
+  "Lover of the sea with 10+ years of sailing experience.",
+  "Certified skipper and maritime safety instructor.",
+  "Enjoys guiding unique island tours and coastal adventures.",
+  "Dedicated to sustainable sailing and eco-tourism.",
+  "A seasoned sailor passionate about Aegean voyages."
+]
+
+
+Skipper.destroy_all
 
 5.times do |i|
   skipper = Skipper.create!(
-    name: "Skipper #{i + 1}",
-    bio: "Experienced skipper with a passion for the sea. Skipper #{i + 1} has sailed across many oceans.",
+    name: names[i],
+    bio: bios[i],
     phone: "+30 69#{rand(1000..9999)}#{rand(1000..9999)}",
     email: "skipper#{i + 1}@example.com"
   )
 
-  if Rails.env.development? || Rails.env.test?
-    # Video
-    video_url = "https://res.cloudinary.com/dhbrz1unb/video/upload/v1745246610/nfka9bcoiyw4w3poxnoe.mp4"
-    skipper.video.attach(io: URI.open(video_url), filename: "promo_video.mp4", content_type: 'video/mp4')
-    # CV
-    cv_path = Rails.root.join('app', 'assets', 'documents', 'sample_cv.pdf')
-    skipper.cv.attach(io: File.open(cv_path), filename: "cv_#{i + 1}.pdf", content_type: 'application/pdf')
+  # Attach CV
+  cv_file = URI.open(cv_url)
+  skipper.cv.attach(io: cv_file, filename: "cv.pdf", content_type: "application/pdf")
 
-    # Docs
-    doc_path = Rails.root.join('app', 'assets', 'documents', 'sample_document.pdf')
-    skipper.docs.attach(io: File.open(doc_path), filename: "document_#{i + 1}.pdf", content_type: 'application/pdf')
+  doc_file = URI.open(doc_url)
+  skipper.docs.attach(io: doc_file, filename: "doc.pdf", content_type: "application/pdf")
 
-    # Photo
-    image_path = Rails.root.join('app', 'assets', 'images', "#{i + 1}.jpg")
-    skipper.photo.attach(io: File.open(image_path), filename: "#{i + 1}.jpg", content_type: 'image/jpeg')
-  end
+  # Attach video
+  video_file = URI.open(video_url)
+  skipper.video.attach(io: video_file, filename: "video.mp4", content_type: "video/mp4")
 
-  puts "✅ Created Skipper #{i + 1}"
+  # Attach image
+  image_file = URI.open(image_urls[i])
+  skipper.photo.attach(io: image_file, filename: "skipper_#{i + 1}.jpg", content_type: "image/jpeg")
 end
 
-puts "🎉 Seeded skippers with all attachments!"
+puts "✅ Seeded 5 skippers with Cloudinary assets!"
