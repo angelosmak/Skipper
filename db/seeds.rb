@@ -31,20 +31,12 @@ Skipper.destroy_all
     email: "skipper#{i + 1}@example.com"
   )
 
-  # Attach CV
-  cv_file = URI.open(cv_url)
-  skipper.cv.attach(io: cv_file, filename: "cv.pdf", content_type: "application/pdf")
+  skipper.image_url = image_urls[i]
+  skipper.video_url = video_url
+  skipper.cv_url = cv_url
+  skipper.doc_url = doc_url
 
-  doc_file = URI.open(doc_url)
-  skipper.docs.attach(io: doc_file, filename: "doc.pdf", content_type: "application/pdf")
-
-  # Attach video
-  video_file = URI.open(video_url)
-  skipper.video.attach(io: video_file, filename: "video.mp4", content_type: "video/mp4")
-
-  # Attach image
-  image_file = URI.open(image_urls[i])
-  skipper.photo.attach(io: image_file, filename: "skipper_#{i + 1}.jpg", content_type: "image/jpeg")
+  skipper.save!  # 💾 This saves the updated attributes
 end
 
 puts "✅ Seeded 5 skippers with Cloudinary assets!"

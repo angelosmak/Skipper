@@ -2,21 +2,17 @@
   <h1>Skippers</h1>
 
   <div class="skippers-list">
-  <% @skippers.each_with_index do |skipper, index| %>
-    <div class="skipper-profile-card">
-      <% if skipper.photo.attached? %>
-        <%= image_tag skipper.photo, class: "skipper-photo" %>
-      <% else %>
-        <%= image_tag "1.jpg", class: "skipper-photo" %>
-      <% end %>
+  <% @skippers.each do |skipper| %>
+  <div class="skipper-profile-card">
+    <%= image_tag(skipper.image_url , class: "skipper-photo") %>
 
-      <div class="skipper-details">
-        <h3><%= link_to skipper.name, skipper_path(skipper) %></h3>
-        <p><%= skipper.bio.truncate(100) %></p>
-        <%= link_to "View Profile", skipper_path(skipper), class: "btn" %>
-      </div>
+    <div class="skipper-details">
+      <h3><%= link_to skipper.name, skipper_path(skipper) %></h3>
+      <p><%= truncate(skipper.bio, length: 100) %></p>
+      <%= link_to "View Profile", skipper_path(skipper), class: "btn" %>
     </div>
-  <% end %>
+  </div>
+<% end %>
 </div>
 </div>
 <style>

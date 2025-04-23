@@ -92,6 +92,14 @@ nav ul li a:hover {
   color: #87CEEB; /* Sky Blue */
 }
 
+a {
+  text-decoration: none;
+  color: #3498db;
+}
+
+a:hover {
+  color: #2980b9;
+}
 /* Hero Section */
 .hero {
   background: url('https://res.cloudinary.com/dhbrz1unb/video/upload/v1745246610/video.mp4') center/cover no-repeat; /* Add your image path here */
@@ -161,4 +169,102 @@ footer {
   text-align: center;
   padding: 20px;
   font-family: 'Open Sans', sans-serif;
+}
+
+
+/* NAVBAR */
+/* Navbar layout */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar-logo img {
+  height: 50px;
+}
+
+/* Hamburger */
+.burger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.burger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: black;
+  transition: 0.3s;
+}
+
+/* Menu overlay */
+.menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  transition: right 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.menu.open {
+  right: 0;
+}
+
+.menu .close {
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 2.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+.menu ul li {
+  margin: 1.5rem 10px;
+}
+
+.menu ul li a {
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: black;
+  transition: color 0.2s;
+}
+
+.menu ul li a:hover {
+  color: #0077cc;
+}
+
+@media (max-width: 768px) {
+  ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
 }

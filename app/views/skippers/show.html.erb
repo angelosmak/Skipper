@@ -1,82 +1,124 @@
 <div class="skipper-profile-page">
   <div class="profile-header">
-    <% if @skipper.photo.attached? %>
-      <%= image_tag @skipper.photo, class: "profile-photo" %>
+    <% if @skipper.image_url %>
+      <div class="profile-photo-wrapper">
+        <%= image_tag @skipper.image_url, class: "profile-photo" %>
+      </div>
     <% end %>
 
     <div class="profile-info">
       <h1><%= @skipper.name %></h1>
-      <p><%= @skipper.bio %></p>
-      <p><strong>Email:</strong> <%= mail_to @skipper.email %></p>
-      <p><strong>Phone:</strong> <%= @skipper.phone %></p>
+      <p class="bio"><%= @skipper.bio %></p>
+
+      <div class="contact-info">
+        <p><strong>Email:</strong> <%= mail_to @skipper.email %></p>
+        <p><strong>Phone:</strong> <%= @skipper.phone %></p>
+      </div>
     </div>
   </div>
 
   <div class="profile-files">
-    <% if @skipper.cv.attached? %>
-      <h3>CV</h3>
-      <%= link_to "Download CV", url_for(@skipper.cv), class: "btn" %>
+    <% if @skipper.cv_url %>
+      <div class="file-section">
+        <h3>CV</h3>
+        <%= link_to "Download CV", @skipper.cv_url, class: "btn" %>
+      </div>
     <% end %>
 
-    <% if @skipper.docs.attached? %>
-      <h3>Documents</h3>
-      <%= link_to "Download Documents", url_for(@skipper.docs), class: "btn" %>
+    <% if @skipper.doc_url %>
+      <div class="file-section">
+        <h3>Documents</h3>
+        <%= link_to "Download Documents", @skipper.doc_url, class: "btn" %>
+      </div>
     <% end %>
 
-    <% if @skipper.video.attached? %>
-      <h3>Video</h3>
-      <%= video_tag url_for(@skipper.video), controls: true, class: "skipper-video" %>
+    <% if @skipper.video_url %>
+      <div class="file-section">
+        <h3>Video</h3>
+        <%= video_tag @skipper.video_url, controls: true, class: "skipper-video" %>
+      </div>
     <% end %>
   </div>
 </div>
 
-
 <style>
-  .skipper-profile-page {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.skipper-profile-page {
+  max-width: 860px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #fdfdfd;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
 }
 
 .profile-header {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
+  gap: 30px;
+  align-items: flex-start;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 30px;
+}
+
+.profile-photo-wrapper {
+  flex-shrink: 0;
 }
 
 .profile-photo {
   width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid #eee;
+  border-radius: 16px;
+  border: 3px solid #0077cc;
 }
 
 .profile-info {
   flex: 1;
 }
 
-.profile-files {
-  margin-top: 30px;
+.profile-info h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  color: #222;
 }
 
-.profile-files h3 {
-  margin-top: 20px;
+.bio {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 15px;
+  margin: 4px 0;
+  color: #444;
+}
+
+.profile-files {
+  margin-top: 40px;
+}
+
+.file-section {
+  margin-bottom: 25px;
+}
+
+.file-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .btn {
   display: inline-block;
   background-color: #0077cc;
-  color: white;
-  padding: 8px 16px;
-  border-radius: 6px;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
   text-decoration: none;
-  margin-top: 10px;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 119, 204, 0.2);
+  transition: background-color 0.3s ease;
 }
 
 .btn:hover {
@@ -84,9 +126,10 @@
 }
 
 .skipper-video {
-  margin-top: 15px;
-  border-radius: 8px;
+  margin-top: 10px;
+  border-radius: 10px;
   max-width: 100%;
+  height: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 </style>

@@ -14,10 +14,52 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+
+    <header class="navbar">
+      <a href="/" class="navbar-logo">
+      <%= image_tag "1.jpg", alt: "Logo" %>
+      </a>
+      <button class="burger" id="burger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="menu" id="menu">
+        <button class="close" id="close" aria-label="Close menu">&times;</button>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/range">Range</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/dealers">Dealers</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
     <%= yield %>
   </body>
 </html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("menu");
+  const closeBtn = document.getElementById("close");
+
+  burger.addEventListener("click", () => {
+    menu.classList.add("open");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    menu.classList.remove("open");
+  });
+
+  // Optional: Close menu when clicking a link
+  document.querySelectorAll(".menu a").forEach(link => {
+    link.addEventListener("click", () => menu.classList.remove("open"));
+  });
+});
+
+</script>
