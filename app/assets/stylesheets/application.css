@@ -108,6 +108,7 @@ a:hover {
   padding: 80px 20px;
   background-size: cover;
   height: 50vh;
+  margin-top: 3vh;
 }
 
 .hero-content {
