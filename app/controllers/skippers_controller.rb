@@ -1,8 +1,8 @@
 class SkippersController < ApplicationController
-  before_action :authenticate_skipper!, only: [:dashboard, :edit, :update]
+  before_action :authenticate_user!
   before_action :set_skipper, only: [:show, :edit, :update]
 
-  # For skippers to see their own dashboard
+  # # For skippers to see their own dashboard
   def dashboard
     @skipper = Skipper.find(session[:skipper_id])
   end
@@ -35,12 +35,12 @@ class SkippersController < ApplicationController
   end
 
   def skipper_params
-    params.require(:skipper).permit(:name, :bio, :video, :cv, :docs)
+    params.require(:skipper).permit(:name, :bio, :video, :cv, :docs, :image_url)
   end
 
-  def authenticate_skipper!
-    unless session[:skipper_id] == @skipper.id
-      redirect_to root_path, alert: "Not authorized"
-    end
-  end
+  # def authenticate_skipper!
+  #   unless session[:skipper_id] == @skipper.id
+  #     redirect_to root_path, alert: "Not authorized"
+  #   end
+  # end
 end

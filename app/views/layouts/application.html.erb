@@ -14,6 +14,8 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
   </head>
 
   <body>
@@ -25,8 +27,16 @@
       <button class="burger" id="burger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
+        <div class="logout-container">
+          <% if user_signed_in? %>
+            <!-- Logout link -->
+            <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: 'logout-button' %>
 
-      <nav class="menu" id="menu">
+            <% end %>
+          </div>
+
+
+                <nav class="menu" id="menu">
         <button class="close" id="close" aria-label="Close menu">&times;</button>
         <ul>
           <li><a href="/">Home</a></li>
@@ -34,6 +44,7 @@
           <li><a href="/about">About</a></li>
           <li><a href="/dealers">Dealers</a></li>
           <li><a href="/contact">Contact</a></li>
+
         </ul>
       </nav>
     </header>
@@ -63,3 +74,18 @@
 });
 
 </script>
+<style>
+  .logout-container {
+  display: flex;
+  align-items: center;
+}
+
+.logout-link {
+  text-decoration: none;
+  padding: 10px;
+}
+
+.logout-link:hover {
+  background-color: #444;
+}
+</style>

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  devise_for :users
+
+  devise_scope :user do
+     get '/users/sign_out' => 'devise/sessions#destroy'
+  end
   get "/", to: "public#home"
   # Skippers' dashboard and profile management
   get  "/dashboard",        to: "skippers#dashboard", as: "skipper_dashboard"

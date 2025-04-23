@@ -61,6 +61,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   background-color: #f1f0f6;
   color: #333;
+  margin-top: 9vh;
 }
 
 /* Navigation Bar */
@@ -187,6 +188,7 @@ footer {
   padding: 0 1.5rem;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
 }
 
 .navbar-logo img {
