@@ -1,34 +1,49 @@
-<div class="container">
-  <h1>Edit Your Profile</h1>
-
-  <%= form_with model: @skipper, local: true do |form| %>
-    <div>
-      <%= form.label :name %><br>
-      <%= form.text_field :name %>
+<div class="skipper-profile-page">
+  <div class="profile-header">
+    <div class="profile-photo-wrapper">
+      <% if @skipper.image_url.present? %>
+        <%= image_tag @skipper.image_url, class: "profile-photo" %>
+      <% end %>
     </div>
 
-    <div>
-      <%= form.label :bio %><br>
-      <%= form.text_area :bio %>
-    </div>
+    <div class="profile-info">
+      <h1>Edit Profile</h1>
 
-    <div>
-      <%= form.label :video %><br>
-      <%= form.file_field :video %>
-    </div>
+      <%= form_with model: @skipper, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= form.label :cv %><br>
-      <%= form.file_field :cv %>
-    </div>
+        <div class="form-group">
+          <%= f.label :bio %>
+          <%= f.text_area :bio, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= form.label :docs %><br>
-      <%= form.file_field :docs %>
-    </div>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
 
-    <div>
-      <%= form.submit "Save Changes", class: "btn" %>
+        <div class="form-group">
+          <%= f.label :phone %>
+          <%= f.text_field :phone, class: "form-control" %>
+        </div>
+
+        <%if false%>
+        <div class="form-group">
+          <%= f.label :image_url, "Image URL" %>
+          <%= f.text_field :image_url, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :video_url, "Video URL" %>
+          <%= f.text_field :video_url, class: "form-control" %>
+        </div>
+        <% end %>
+        
+        <%= f.submit "Save Changes", class: "btn" %>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>

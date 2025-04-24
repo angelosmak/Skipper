@@ -353,3 +353,171 @@ footer {
     font-size: 1.2rem;
   }
 }
+
+
+/* -----------SHOW----------- */
+
+
+.counter-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 50px 10px;
+  background: #f7f7f7;
+  text-align: center;
+}
+
+.stat {
+  padding: 10px;
+}
+
+.stat h3 {
+  font-size: 3rem;
+  color: #0057a8;
+  margin: 0;
+}
+
+.stat p {
+  font-size: 1.1rem;
+  margin-top: 8px;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .stat h3 {
+    font-size: 2.5rem;
+  }
+  .stat p {
+    font-size: 1rem;
+  }
+}
+
+
+.skipper-profile-page {
+  max-width: 980px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  background: #fdfdfd;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .skipper-profile-page {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .skipper-profile-page {
+    padding: 20px 15px;
+    border-radius: 12px;
+  }
+}
+
+.profile-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 30px;
+}
+
+.profile-photo-wrapper {
+  flex-shrink: 0;
+}
+
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #0077cc;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-info h1 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  color: #222;
+}
+
+.bio {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 15px;
+  margin: 4px 0;
+  color: #444;
+}
+
+.profile-files {
+  margin-top: 40px;
+}
+
+.file-section {
+  margin-bottom: 25px;
+}
+
+.file-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #0077cc;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 2px 6px rgba(0, 119, 204, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #005fa3;
+}
+
+.skipper-video {
+  margin-top: 10px;
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------EDIT---------- */
+.form-control {
+  width: 100%;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
+  display: block;
+  color: #333;
+}

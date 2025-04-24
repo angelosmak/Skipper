@@ -42,10 +42,12 @@ class SkippersController < ApplicationController
   end
 
   def update
+    @skipper = Skipper.find(params[:id])
+
     if @skipper.update(skipper_params)
-      redirect_to skipper_dashboard_path, notice: "Profile updated!"
+      redirect_to skipper_path(@skipper), notice: "Profile updated successfully"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -56,7 +58,7 @@ class SkippersController < ApplicationController
   end
 
   def skipper_params
-    params.require(:skipper).permit(:name, :bio, :video, :cv, :docs, :image_url)
+    params.require(:skipper).permit(:name, :bio, :email, :video, :cv, :docs, :image_url)
   end
 
   # def authenticate_skipper!
