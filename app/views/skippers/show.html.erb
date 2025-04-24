@@ -11,11 +11,76 @@
       <p class="bio"><%= @skipper.bio %></p>
 
       <div class="contact-info">
-        <p><strong>Email:</strong> <%= mail_to @skipper.email %></p>
-        <p><strong>Phone:</strong> <%= @skipper.phone %></p>
+        <p><strong><i class="fa-solid fa-envelope"></i></strong> <%= mail_to @skipper.email %></p>
+        <p><strong><i class="fa-solid fa-phone"></i></strong> <%= @skipper.phone %></p>
       </div>
     </div>
+
+    <% if @skipper.video_url %>
+  <div class="file-section">
+    <%= video_tag @skipper.video_url, controls: true, class: "skipper-video", poster: asset_path("video-placeholder.png") %>
   </div>
+<% end %>
+  </div>
+
+<section id="stats" class="counter-section">
+  <div class="stat">
+    <h3 class="counter" data-target="10">0</h3>
+    <p>Years of Experience</p>
+  </div>
+  <div class="stat">
+    <h3 class="counter" data-target="50000">0</h3>
+    <p>Nautical Miles</p>
+  </div>
+  <div class="stat">
+    <h3 class="counter" data-target="1000">0</h3>
+    <p>Satisfied Customers</p>
+  </div>
+  <div class="stat">
+    <h3 class="counter" data-target="60">0</h3>
+    <p>Biggest Charter</p>
+  </div>
+</section>
+
+
+<div class="calendar">
+  <div class="month-nav">
+    <%= link_to '‹', skipper_path(@skipper, month: @current_month.prev_month.strftime("%Y-%m")), class: "nav-arrow" %>
+    <span class="month-title"><%= @current_month.strftime("%B %Y") %></span>
+    <%= link_to '›', skipper_path(@skipper, month: @current_month.next_month.strftime("%Y-%m")), class: "nav-arrow" %>
+  </div>
+
+  <div class="calendar-grid">
+    <% %w[Sun Mon Tue Wed Thu Fri Sat].each do |day_name| %>
+      <div class="day-name"><%= day_name %></div>
+    <% end %>
+
+    <% first_day = @current_month.beginning_of_month %>
+    <% last_day = @current_month.end_of_month %>
+    <% start_padding = first_day.wday %>
+    <% end_padding = 6 - last_day.wday %>
+
+    <% start_padding.times do %>
+      <div class="day-cell empty"></div>
+    <% end %>
+
+    <% (first_day..last_day).each do |date| %>
+      <div class="day-cell <%= 'booked' if @booked_dates.include?(date) %>">
+        <%= date.day %>
+      </div>
+    <% end %>
+
+    <% end_padding.times do %>
+      <div class="day-cell empty"></div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
 
   <div class="profile-files">
     <% if @skipper.cv_url %>
@@ -32,24 +97,69 @@
       </div>
     <% end %>
 
-    <% if @skipper.video_url %>
-      <div class="file-section">
-        <h3>Video</h3>
-        <%= video_tag @skipper.video_url, controls: true, class: "skipper-video" %>
-      </div>
-    <% end %>
   </div>
 </div>
 
 <style>
+
+.counter-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding: 50px 10px;
+  background: #f7f7f7;
+  text-align: center;
+}
+
+.stat {
+  padding: 10px;
+}
+
+.stat h3 {
+  font-size: 3rem;
+  color: #0057a8;
+  margin: 0;
+}
+
+.stat p {
+  font-size: 1.1rem;
+  margin-top: 8px;
+  color: #444;
+}
+
+@media (max-width: 768px) {
+  .stat h3 {
+    font-size: 2.5rem;
+  }
+  .stat p {
+    font-size: 1rem;
+  }
+}
+
+
 .skipper-profile-page {
-  max-width: 860px;
+  max-width: 980px;
   margin: 60px auto;
-  padding: 30px;
+  padding: 40px 30px;
   background: #fdfdfd;
   border-radius: 20px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
   font-family: "Segoe UI", sans-serif;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+  .skipper-profile-page {
+    padding: 30px 20px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .skipper-profile-page {
+    padding: 20px 15px;
+    border-radius: 12px;
+  }
 }
 
 .profile-header {
@@ -69,7 +179,7 @@
   width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 50%;
   border: 3px solid #0077cc;
 }
 
@@ -133,3 +243,40 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 </style>
+
+  <script>
+  function animateCounter(el, target) {
+    let current = 0;
+    const increment = target / 100;
+    const update = () => {
+      current += increment;
+      if (current < target) {
+        el.textContent = Math.ceil(current);
+        requestAnimationFrame(update);
+      } else {
+        el.textContent = target;
+      }
+    };
+    update();
+  }
+
+  function handleScroll() {
+    const counters = document.querySelectorAll(".counter");
+    counters.forEach(counter => {
+      const rect = counter.getBoundingClientRect();
+      if (
+        rect.top >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+      ) {
+        if (!counter.classList.contains("started")) {
+          counter.classList.add("started");
+          const target = parseInt(counter.dataset.target, 10);
+          animateCounter(counter, target);
+        }
+      }
+    });
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("load", handleScroll);
+</script>

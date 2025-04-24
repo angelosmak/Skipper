@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  skipper: one
+  start_time: 2025-04-23 21:18:14
+  end_time: 2025-04-23 21:18:14
+
+two:
+  skipper: two
+  start_time: 2025-04-23 21:18:14
+  end_time: 2025-04-23 21:18:14

@@ -1,0 +1,7 @@
+<% current_date = Date.today.beginning_of_month %>
+<% end_date = current_date.end_of_month %>
+<% (current_date..end_date).each do |date| %>
+  <div class="calendar-day <%= 'booked' if booked_dates.include?(date) %>">
+    <%= date.day %>
+  </div>
+<% end %>
