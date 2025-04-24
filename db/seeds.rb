@@ -51,20 +51,30 @@
 #   # Link the user to the skipper
 #   skipper.update!(user_id: user.id)
 # end
-skipper_bios = {
-  1 => "Nikos has sailed the Mediterranean for over 15 years, mastering both tranquil and stormy seas. He specializes in luxury sailing tours and personalized experiences. His calm demeanor and rich storytelling make him a favorite among guests. Nikos believes every journey should be as memorable as the destination.",
-  2 => "Spiros is an expert navigator with a strong background in marine biology. He’s passionate about educating guests on ocean ecosystems during each sail. With his warm hospitality and adventurous spirit, he makes every trip enjoyable. Spiros is fluent in three languages and loves connecting with international travelers.",
-  3 => "Kostas grew up by the sea and began sailing competitively at a young age. He brings deep technical knowledge and a love for island hopping. Guests appreciate his humor and insider tips on hidden beaches. Yannis always ensures that safety and fun go hand-in-hand.",
-  4 => "Dimitris is known for his meticulous planning and exceptional communication. He crafts tailor-made voyages that cater to families and groups. With a background in event coordination, he adds a unique flair to every sailing adventure. Dimitri's patience and energy are especially appreciated by guests with kids.",
-  5 => "Yannis has been a skipper on over 200 voyages, ranging from regattas to private retreats. His expertise in sailing techniques and weather patterns is unmatched. When not at sea, he teaches sailing courses to aspiring skippers. Takis is passionate about sharing his love of the ocean with every guest."
-}
+# skipper_bios = {
+#   1 => "Nikos has sailed the Mediterranean for over 15 years, mastering both tranquil and stormy seas. He specializes in luxury sailing tours and personalized experiences. His calm demeanor and rich storytelling make him a favorite among guests. Nikos believes every journey should be as memorable as the destination.",
+#   2 => "Spiros is an expert navigator with a strong background in marine biology. He’s passionate about educating guests on ocean ecosystems during each sail. With his warm hospitality and adventurous spirit, he makes every trip enjoyable. Spiros is fluent in three languages and loves connecting with international travelers.",
+#   3 => "Kostas grew up by the sea and began sailing competitively at a young age. He brings deep technical knowledge and a love for island hopping. Guests appreciate his humor and insider tips on hidden beaches. Yannis always ensures that safety and fun go hand-in-hand.",
+#   4 => "Dimitris is known for his meticulous planning and exceptional communication. He crafts tailor-made voyages that cater to families and groups. With a background in event coordination, he adds a unique flair to every sailing adventure. Dimitri's patience and energy are especially appreciated by guests with kids.",
+#   5 => "Yannis has been a skipper on over 200 voyages, ranging from regattas to private retreats. His expertise in sailing techniques and weather patterns is unmatched. When not at sea, he teaches sailing courses to aspiring skippers. Takis is passionate about sharing his love of the ocean with every guest."
+# }
 
-skipper_bios.each do |id, bio|
-  skipper = Skipper.find_by(id: id)
-  if skipper
-    skipper.update!(bio: bio)
-    puts "Updated bio for Skipper ##{id}"
-  else
-    puts "Skipper ##{id} not found"
+# skipper_bios.each do |id, bio|
+#   skipper = Skipper.find_by(id: id)
+#   if skipper
+#     skipper.update!(bio: bio)
+#     puts "Updated bio for Skipper ##{id}"
+#   else
+#     puts "Skipper ##{id} not found"
+#   end
+# end
+
+skipper = Skipper.find(4)
+
+# Example: Book every Saturday to Friday for two weeks starting April 6, 2025
+2.times do |week_offset|
+  start_date = Date.new(2025, 4, 5) + (week_offset * 7) # April 5 is a Saturday
+  (start_date..start_date + 6).each do |date|
+    Booking.create!(skipper: skipper, date: date)
   end
 end

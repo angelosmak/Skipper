@@ -18,15 +18,24 @@ class SkippersController < ApplicationController
     @skipper = Skipper.find(params[:id])
 
     # Use params[:month] if present, or default to the current month
-    if params[:month]
-      @current_month = Date.parse("#{params[:month]}-01")
+    @current_month = if params[:month]
+      Date.parse("#{params[:month]}-01")
     else
-      @current_month = Date.today.beginning_of_month
+      Date.today.beginning_of_month
     end
 
     @days_in_month = (@current_month.beginning_of_month..@current_month.end_of_month).to_a
     @booked_dates = @skipper.bookings.where(date: @days_in_month).pluck(:date)
+
+    if turbo_frame_request?
+      render partial: "calendar", locals: {
+        skipper: @skipper,
+        current_month: @current_month,
+        booked_dates: @booked_dates
+      }
+    end
   end
+
 
   # Edit and update skipper's own profile
   def edit

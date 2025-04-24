@@ -1,0 +1,34 @@
+<turbo-frame id="calendar">
+  <div class="calendar">
+    <div class="month-nav">
+      <%= link_to 'Prev', skipper_path(@skipper, month: @current_month.prev_month), data: { turbo_frame: "calendar" } %>
+      <span><%= @current_month.strftime("%B %Y") %></span>
+      <%= link_to 'Next', skipper_path(@skipper, month: @current_month.next_month), data: { turbo_frame: "calendar" } %>
+    </div>
+
+    <div class="calendar-grid">
+      <% %w[Sun Mon Tue Wed Thu Fri Sat].each do |day_name| %>
+        <div class="day-name"><%= day_name %></div>
+      <% end %>
+
+      <% first_day = @current_month.beginning_of_month %>
+      <% last_day = @current_month.end_of_month %>
+      <% start_padding = first_day.wday %>
+      <% end_padding = 6 - last_day.wday %>
+
+      <% start_padding.times do %>
+        <div class="day-cell empty"></div>
+      <% end %>
+
+      <% (first_day..last_day).each do |date| %>
+        <div class="day-cell <%= 'booked' if @booked_dates.include?(date) %>">
+          <%= date.day %>
+        </div>
+      <% end %>
+
+      <% end_padding.times do %>
+        <div class="day-cell empty"></div>
+      <% end %>
+    </div>
+  </div>
+</turbo-frame>
