@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
     if @booking.save
       redirect_to skipper_path(@skipper), notice: "Booking created successfully!"
     else
-      render 'skippers/show', alert: "Unable to create booking."
+      render "skippers/show", alert: "Unable to create booking."
     end
   end
 

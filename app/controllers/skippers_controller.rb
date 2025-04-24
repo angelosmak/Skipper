@@ -2,6 +2,7 @@ class SkippersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_skipper, only: [ :show, :edit, :update ]
 
+
   # # For skippers to see their own dashboard
   def dashboard
     @skipper = Skipper.find(session[:skipper_id])
