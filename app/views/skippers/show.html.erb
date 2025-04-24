@@ -1,7 +1,7 @@
 <div class="skipper-profile-page">
   <% if @skipper.user == current_user %>
-  <%= link_to 'Edit Profile', edit_skipper_path(@skipper), class: "btn", style: "margin-top: 10px;" %>
-<% end %>
+    <%= link_to 'Edit Profile', edit_skipper_path(@skipper), class: "btn", style: "margin-top: 10px;" %>
+  <% end %>
   <div class="profile-header">
     <% if @skipper.image_url %>
       <div class="profile-photo-wrapper">

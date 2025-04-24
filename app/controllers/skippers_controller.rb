@@ -42,12 +42,28 @@ class SkippersController < ApplicationController
   end
 
   def update
+    # Fetch the skipper by ID
     @skipper = Skipper.find(params[:id])
 
+    # Check if the skipper's email is changing
+    email_changed = @skipper.email != skipper_params[:email]
+
+    # Attempt to update the skipper's attributes
     if @skipper.update(skipper_params)
-      redirect_to skipper_path(@skipper), notice: "Profile updated successfully"
+      # If the email is changing, update the related User's email
+      if email_changed
+        @user = @skipper.user
+        if @user.update(email: @skipper.email)
+          flash[:notice] = "Profile and user email updated successfully!"
+        else
+          flash[:alert] = "Error updating user email."
+        end
+      end
+
+      # Redirect to the skipper"s profile page or render edit if validation fails
+      redirect_to @skipper, notice: "Profile updated successfully!"
     else
-      render :edit, status: :unprocessable_entity
+      render :edit
     end
   end
 
