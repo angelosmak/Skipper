@@ -81,6 +81,6 @@ test:
 #
 production:
   <<: *default
-  database: skipper_portal_production
-  username: skipper_portal
+  database: skipper_portal_database
+  username: skipper_portal_database_user
   password: <%= ENV["SKIPPER_PORTAL_DATABASE_PASSWORD"] %>
